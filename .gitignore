@@ -20,6 +20,7 @@ build
 out
 generated
 MANIFEST.MF
+.env
 
 #gradle
 gradle
