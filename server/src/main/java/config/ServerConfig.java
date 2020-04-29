@@ -1,8 +1,12 @@
 package config;
 
+import api.models.validation.BookValidator;
+import api.models.validation.ClientValidator;
+import api.models.validation.PurchaseValidator;
 import api.services.BookService;
 import api.services.ClientService;
 
+import api.services.PurchaseService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.remoting.rmi.RmiServiceExporter;
@@ -20,28 +24,29 @@ import services.PurchaseServerService;
 @Configuration
 public class ServerConfig {
 
-    @Bean
-    RmiServiceExporter rmiServiceExporter() {
-        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+    // exported services
 
-        rmiServiceExporter.setServiceName("BookService");
+    @Bean
+    RmiServiceExporter rmiBookServiceExporter() {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        rmiServiceExporter.setServiceName(BookService.NAME);
         rmiServiceExporter.setServiceInterface(BookService.class);
         rmiServiceExporter.setService(bookService());
-
-//        rmiServiceExporter.setServiceName("ClientService");
-//        rmiServiceExporter.setServiceInterface(ClientService.class);
-//        rmiServiceExporter.setService(clientService());
-//
-//        rmiServiceExporter.setServiceName("PurchaseService");
-//        rmiServiceExporter.setServiceInterface(ClientService.class);
-//        rmiServiceExporter.setService(clientService());
-
-        rmiServiceExporter.setRegistryPort(1099);
-
+        rmiServiceExporter.setRegistryPort(BookService.PORT);
         return rmiServiceExporter;
     }
 
-    // services
+    @Bean
+    RmiServiceExporter rmiClientServiceExporter() {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        rmiServiceExporter.setServiceName(ClientService.NAME);
+        rmiServiceExporter.setServiceInterface(ClientService.class);
+        rmiServiceExporter.setService(clientService());
+        rmiServiceExporter.setRegistryPort(ClientService.PORT);
+        return rmiServiceExporter;
+    }
+
+    // implemented services
 
     @Bean
     BookService bookService() {
@@ -49,12 +54,12 @@ public class ServerConfig {
     }
 
     @Bean
-    ClientServerService clientService() {
+    ClientService clientService() {
         return new ClientServerService();
     }
 
     @Bean
-    PurchaseServerService purchaseService() {
+    PurchaseService purchaseService() {
         return new PurchaseServerService();
     }
 
@@ -79,5 +84,18 @@ public class ServerConfig {
 
     // validators
 
+    @Bean
+    BookValidator bookValidator() {
+        return new BookValidator();
+    }
 
+    @Bean
+    ClientValidator clientValidator() {
+        return new ClientValidator();
+    }
+
+    @Bean
+    PurchaseValidator purchaseValidator() {
+        return new PurchaseValidator();
+    }
 }

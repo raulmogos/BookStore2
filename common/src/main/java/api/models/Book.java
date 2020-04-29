@@ -1,8 +1,7 @@
 package api.models;
 
-import java.io.Serializable;
+public class Book extends BaseEntity<Long> {
 
-public class Book extends BaseEntity<Long> implements Serializable {
     private String title;
     private String author;
     private double price;
@@ -14,7 +13,7 @@ public class Book extends BaseEntity<Long> implements Serializable {
     }
 
     public Book(Long ID, String title, String author, double price) {
-        this.id = ID;
+        super.id = ID;
         this.title = title;
         this.author = author;
         this.price = price;

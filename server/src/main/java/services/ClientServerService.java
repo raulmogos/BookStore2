@@ -1,5 +1,6 @@
 package services;
 
+import api.models.Client;
 import api.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import repository.client.ClientRepository;
@@ -10,7 +11,12 @@ public class ClientServerService implements ClientService {
     ClientRepository clientRepository;
 
     @Override
-    public void addClient(String firstName, String lastName) {
+    public void addClient(String firstName, String lastName, double moneySpent) {
 
+    }
+
+    @Override
+    public Iterable<Client> getAllClients() {
+        return clientRepository.all();
     }
 }

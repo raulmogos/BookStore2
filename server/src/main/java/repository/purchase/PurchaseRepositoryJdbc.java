@@ -12,7 +12,7 @@ public class PurchaseRepositoryJdbc implements PurchaseRepository {
     private JdbcOperations jdbcOperations;
 
     @Override
-    public Optional<Purchase> find(Long aLong) {
+    public Optional<Purchase> get(Long aLong) {
         return Optional.empty();
     }
 

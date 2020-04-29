@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface Repository<ID, T extends BaseEntity<ID>> {
 
-    Optional<T> find(ID id);
+    Optional<T> get(ID id);
 
     Iterable<T> all();
 

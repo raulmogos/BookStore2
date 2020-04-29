@@ -22,12 +22,10 @@ public class JdbcConfig {
     @Bean
     DataSource dataSource() {
         BasicDataSource basicDataSource = new BasicDataSource();
-
         basicDataSource.setUrl(Dotenv.load().get("DB_URL"));
         basicDataSource.setUsername(Dotenv.load().get("DB_USERNAME"));
         basicDataSource.setPassword(Dotenv.load().get("DB_PASSWORD"));
         basicDataSource.setInitialSize(2);  // ?
-
         return basicDataSource;
     }
 }

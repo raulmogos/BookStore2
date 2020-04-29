@@ -1,123 +1,98 @@
-//package ui;
-//
-//import client.ClientService;
-//import org.json.simple.JSONObject;
-//import org.json.simple.JSONValue;
-//
-//import java.io.BufferedReader;
-//import java.io.IOException;
-//import java.io.InputStreamReader;
-//import java.util.concurrent.ExecutionException;
-//import java.util.concurrent.Future;
-//
-//public class Console {
-//
-//    private ClientService clientService;
-//
-//    public Console(ClientService clientService) {
-//        this.clientService = clientService;
-//    }
-//
-//    public void run() {
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        while (true) {
-//            System.out.println("\n");
-//            System.out.println("Menu:");
-//            System.out.println("0 - Exit\n");
-//            System.out.println("1 - Add Book");
-//            System.out.println("2 - Add Client");
-//            System.out.println("3 - Add Purchase - Buy a book\n");
-//            System.out.println("4 - List Books");
-//            System.out.println("5 - List Clients");
-//            System.out.println("6 - List Purchases\n");
-//            System.out.println("7 - Update Book");
-//            System.out.println("8 - Update Client\n");
-//            System.out.println("9 - Delete Book");
-//            System.out.println("10 - Delete Client");
-//            System.out.println("11 - Delete Purchase\n");
-//            System.out.println("12 - Filter Books by Author");
-//            System.out.println("13 - Filter Books by Price");
-//            System.out.println("14 - Filter Clients by Name\n");
-//            System.out.println("15 - Top 10 clients on money spent");
-//            try {
-//                String choice = reader.readLine();
-//                int intChoice = Integer.parseInt(choice);
-//                switch (intChoice) {
-//                    case 0:
-//                        return;
-//                    case 1:
-//                        addBook();
-//                        break;
-//                    case 2:
-//                        addClient();
-//                        break;
-//                    case 3:
-//                        addPurchase();
-//                        break;
-//                    case 4:
-//                        printBooks();
-//                        break;
-//                    case 5:
-//                        printClients();
-//                        break;
-//                    case 6:
-//                        printPurchases();
-//                        break;
-//                    case 7:
-//                        updateBook();
-//                        break;
-//                    case 8:
-//                        updateClient();
-//                        break;
-//                    case 9:
-//                        deleteBook();
-//                        break;
-//                    case 10:
-//                        deleteClient();
-//                        break;
-//                    case 11:
-//                        deletePurchase();
-//                        break;
-//                    case 12:
-//                        filterBooksAuthor();
-//                        break;
-//                    case 13:
-//                        filterBooksPrice();
-//                        break;
-//                    case 14:
-//                        filterClientsName();
-//                        break;
-//                    case 15:
-//                        filterTopClients();
-//                        break;
-//                    default:
-//                        System.out.println("Invalid choice");
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private void addBook() {
-//        String title, author, price;
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Book Title:");
-//            title = reader.readLine();
-//            System.out.println("Book Author:");
-//            author = reader.readLine();
-//            System.out.println("Book Price:");
-//            price = reader.readLine();
-//            Future<String> out = this.clientService.addBook(title, author, Integer.parseInt(price));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void addClient() {
+package ui;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Console {
+
+    @Autowired
+    private UiBooks uiBooks;
+
+    public void run() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            System.out.println("\n");
+            System.out.println("Menu:");
+            System.out.println("0 - Exit\n");
+            System.out.println("1 - Add Book");
+            System.out.println("2 - Add Client");
+            System.out.println("3 - Add Purchase - Buy a book\n");
+            System.out.println("4 - List Books");
+            System.out.println("5 - List Clients");
+            System.out.println("6 - List Purchases\n");
+            System.out.println("7 - Update Book");
+            System.out.println("8 - Update Client\n");
+            System.out.println("9 - Delete Book");
+            System.out.println("10 - Delete Client");
+            System.out.println("11 - Delete Purchase\n");
+            System.out.println("12 - Filter Books by Author");
+            System.out.println("13 - Filter Books by Price");
+            System.out.println("14 - Filter Clients by Name\n");
+            System.out.println("15 - Top 10 clients on money spent");
+            try {
+                String choice = reader.readLine();
+                int intChoice = Integer.parseInt(choice);
+                switch (intChoice) {
+                    case 0:
+                        return;
+                    case 1:
+                        uiBooks.addBook();
+                        break;
+                    case 2:
+                        addClient();
+                        break;
+                    case 3:
+                        addPurchase();
+                        break;
+                    case 4:
+                        uiBooks.printBooks();
+                        break;
+                    case 5:
+                        printClients();
+                        break;
+                    case 6:
+                        printPurchases();
+                        break;
+                    case 7:
+                        uiBooks.updateBook();
+                        break;
+                    case 8:
+                        updateClient();
+                        break;
+                    case 9:
+                        uiBooks.deleteBook();
+                        break;
+                    case 10:
+                        deleteClient();
+                        break;
+                    case 11:
+                        deletePurchase();
+                        break;
+                    case 12:
+                        filterBooksAuthor();
+                        break;
+                    case 13:
+                        filterBooksPrice();
+                        break;
+                    case 14:
+                        filterClientsName();
+                        break;
+                    case 15:
+                        filterTopClients();
+                        break;
+                    default:
+                        System.out.println("Invalid choice");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void addClient() {
 //        String firstname, lastname;
 //
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -131,9 +106,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void addPurchase() {
+    }
+
+    private void addPurchase() {
 //        String bookID, clientID;
 //
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -147,20 +122,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void printBooks() {
-//        try {
-//            Future<String> out = this.clientService.getAllBooks();
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> books = (Iterable<String>) jsonObject.get("data");
-//            books.forEach(System.out::println);
-//        } catch (InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void printClients() {
+    }
+
+    private void printClients() {
 //        try {
 //            Future<String> out = this.clientService.getAllClients();
 //            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
@@ -169,9 +133,9 @@
 //        } catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void printPurchases() {
+    }
+
+    private void printPurchases() {
 //        try {
 //            Future<String> out = this.clientService.getAllPurchases();
 //            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
@@ -180,29 +144,9 @@
 //        } catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void updateBook() {
-//        String ID, title, author, price;
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Book ID:");
-//            ID = reader.readLine();
-//            System.out.println("New Book Title (Blank if unchanged):");
-//            title = reader.readLine();
-//            System.out.println("New Book Author (Blank if unchanged):");
-//            author = reader.readLine();
-//            System.out.println("New Book Price (Blank if unchanged):");
-//            price = reader.readLine();
-//            Future<String> out = this.clientService.updateBook(Long.parseLong(ID), title, author, Integer.parseInt(price));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void updateClient() {
+    }
+
+    private void updateClient() {
 //        String ID, firstname, lastname, spendings;
 //
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -220,22 +164,11 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void deleteBook() {
-//        String ID;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Book ID:");
-//            ID = reader.readLine();
-//            Future<String> out = this.clientService.deleteBook(Long.parseLong(ID));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    private void deleteClient() {
+    }
+
+
+
+    private void deleteClient() {
 //        String ID;
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        try {
@@ -246,9 +179,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void deletePurchase() {
+    }
+
+    private void deletePurchase() {
 //        String ID;
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        try {
@@ -259,9 +192,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void filterBooksAuthor() {
+    }
+
+    private void filterBooksAuthor() {
 //        String author;
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        try {
@@ -274,9 +207,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void filterBooksPrice() {
+    }
+
+    private void filterBooksPrice() {
 //        String minPrice, maxPrice;
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        try {
@@ -291,9 +224,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void filterClientsName() {
+    }
+
+    private void filterClientsName() {
 //        String name;
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        try {
@@ -306,9 +239,9 @@
 //        } catch (IOException | InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//
-//    private void filterTopClients() {
+    }
+
+    private void filterTopClients() {
 //        try {
 //            Future<String> out = this.clientService.filterTopClients();
 //            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
@@ -317,5 +250,5 @@
 //        } catch (InterruptedException | ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//    }
-//}
+    }
+}

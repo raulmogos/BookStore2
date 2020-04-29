@@ -1,8 +1,7 @@
 import api.services.BookService;
-import config.ClientConfig;
+import api.services.ClientService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.Arrays;
+import ui.Console;
 
 public class AppClient {
     public static void main(String[] args) {
@@ -10,8 +9,7 @@ public class AppClient {
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("config");
 
-        BookService bookService = (BookService) context.getBean(BookService.class);
-        System.out.println(bookService.getBookById(1L));
+        context.getBean(Console.class).run();
 
         System.out.println("client stopped");
     }

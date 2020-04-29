@@ -1,9 +1,11 @@
 package api.models;
 
+import java.io.Serializable;
+
 /**
  * @author radu.
  */
-public class BaseEntity<ID> {
+public class BaseEntity<ID> implements Serializable {
     protected ID id;
 
     public ID getId() {

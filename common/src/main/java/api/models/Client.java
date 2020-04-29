@@ -1,13 +1,21 @@
 package api.models;
 
-import java.io.Serializable;
+public class Client extends BaseEntity<Long> {
 
-public class Client extends BaseEntity<Long> implements Serializable {
     private String firstName;
     private String lastName;
-    private int moneySpent;
+    private double moneySpent;
 
-    public Client(Long id, String firstName, String lastName, int moneySpent) {
+    public Client() {
+    }
+
+    public Client(String firstName, String lastName, double moneySpent) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.moneySpent = moneySpent;
+    }
+
+    public Client(Long id, String firstName, String lastName, double moneySpent) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,16 +38,26 @@ public class Client extends BaseEntity<Long> implements Serializable {
         this.lastName = lastName;
     }
 
-    public int getMoneySpent() {
+    public double getMoneySpent() {
         return moneySpent;
     }
 
-    public void setMoneySpent(int moneySpent) {
+    public void setMoneySpent(double moneySpent) {
         this.moneySpent = moneySpent;
     }
 
     @Override
     public String toString() {
-        return "Client - ID: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", moneySpent: " + moneySpent + ";";
+        return "Client{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", moneySpent=" + moneySpent +
+                ", id=" + id +
+                '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "Client - ID: " + id + ", firstName: " + firstName + ", lastName: " + lastName + ", moneySpent: " + moneySpent + ";";
+//    }
 }

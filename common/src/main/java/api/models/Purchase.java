@@ -1,11 +1,12 @@
 package api.models;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
-public class Purchase extends BaseEntity<Long> implements Serializable {
+public class Purchase extends BaseEntity<Long> {
     Long bookId;
     Long clientId;
+
+    public Purchase() {
+
+    }
 
     public Purchase (Long id, Long bookId, Long clientId) {
         this.id = id;
@@ -13,7 +14,7 @@ public class Purchase extends BaseEntity<Long> implements Serializable {
         this.clientId = clientId;
     }
 
-    public Purchase(Long bookId, Long clientId, LocalDate lastModifiedDate) {
+    public Purchase(Long bookId, Long clientId) {
         this.bookId = bookId;
         this.clientId = clientId;
     }
@@ -36,6 +37,15 @@ public class Purchase extends BaseEntity<Long> implements Serializable {
 
     @Override
     public String toString() {
-        return "Purchase: " + "id: " + id + ", bookId: " + bookId + ", clientId: " + clientId;
+        return "Purchase{" +
+                "bookId=" + bookId +
+                ", clientId=" + clientId +
+                ", id=" + id +
+                '}';
     }
+
+    //    @Override
+//    public String toString() {
+//        return "Purchase: " + "id: " + id + ", bookId: " + bookId + ", clientId: " + clientId;
+//    }
 }
