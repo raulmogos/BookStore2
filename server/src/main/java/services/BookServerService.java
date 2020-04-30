@@ -50,6 +50,17 @@ public class BookServerService implements BookService {
     }
 
     @Override
+    public Iterable<Book> filterBookAuthor(String author) {
+        ArrayList<Book> filteredBooks = new ArrayList<>();
+        bookRepository.all().forEach((book) -> {
+            if (book.getAuthor().equals(author)) {
+                filteredBooks.add(book);
+            }
+        });
+        return filteredBooks;
+    }
+
+    @Override
     public Iterable<Book> filterBookPrice(double min, double max) {
         ArrayList<Book> filteredBooks = new ArrayList<>();
         bookRepository.all().forEach((book) -> {

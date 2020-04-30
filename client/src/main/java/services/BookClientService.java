@@ -35,6 +35,11 @@ public class BookClientService implements BookService {
     }
 
     @Override
+    public Iterable<Book> filterBookAuthor(String author) {
+        return bookServerService.filterBookAuthor(author);
+    }
+
+    @Override
     public Iterable<Book> filterBookPrice(double min, double max) {
         return bookServerService.filterBookPrice(min, max);
     }

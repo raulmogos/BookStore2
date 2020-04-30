@@ -46,6 +46,16 @@ public class ServerConfig {
         return rmiServiceExporter;
     }
 
+    @Bean
+    RmiServiceExporter rmiPurchaseServiceExporter() {
+        RmiServiceExporter rmiServiceExporter = new RmiServiceExporter();
+        rmiServiceExporter.setServiceName(PurchaseService.NAME);
+        rmiServiceExporter.setServiceInterface(PurchaseService.class);
+        rmiServiceExporter.setService(purchaseService());
+        rmiServiceExporter.setRegistryPort(PurchaseService.PORT);
+        return rmiServiceExporter;
+    }
+
     // implemented services
 
     @Bean

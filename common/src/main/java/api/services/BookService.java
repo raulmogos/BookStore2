@@ -18,5 +18,7 @@ public interface BookService {
 
     Iterable<Book> getAllBooks();
 
+    Iterable<Book> filterBookAuthor(String author);
+
     Iterable<Book> filterBookPrice(double min, double max);
 }

@@ -10,6 +10,10 @@ public class Console {
 
     @Autowired
     private UiBooks uiBooks;
+    @Autowired
+    private UiClients uiClients;
+    @Autowired
+    private UiPurchases uiPurchases;
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -42,46 +46,46 @@ public class Console {
                         uiBooks.addBook();
                         break;
                     case 2:
-                        addClient();
+                        uiClients.addClient();
                         break;
                     case 3:
-                        addPurchase();
+                        uiPurchases.addPurchase();
                         break;
                     case 4:
                         uiBooks.printBooks();
                         break;
                     case 5:
-                        printClients();
+                        uiClients.printClients();
                         break;
                     case 6:
-                        printPurchases();
+                        uiPurchases.printPurchases();
                         break;
                     case 7:
                         uiBooks.updateBook();
                         break;
                     case 8:
-                        updateClient();
+                        uiClients.updateClient();
                         break;
                     case 9:
                         uiBooks.deleteBook();
                         break;
                     case 10:
-                        deleteClient();
+                        uiClients.deleteClient();
                         break;
                     case 11:
-                        deletePurchase();
+                        uiPurchases.deletePurchase();
                         break;
                     case 12:
-                        filterBooksAuthor();
+                        uiBooks.filterBooksAuthor();
                         break;
                     case 13:
-                        filterBooksPrice();
+                        uiBooks.filterBooksPrice();
                         break;
                     case 14:
-                        filterClientsName();
+                        uiClients.filterClientsName();
                         break;
                     case 15:
-                        filterTopClients();
+                        uiClients.filterTopClients();
                         break;
                     default:
                         System.out.println("Invalid choice");
@@ -90,165 +94,5 @@ public class Console {
                 e.printStackTrace();
             }
         }
-    }
-
-    private void addClient() {
-//        String firstname, lastname;
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("First Name:");
-//            firstname = reader.readLine();
-//            System.out.println("Last Name:");
-//            lastname = reader.readLine();
-//            Future<String> out = this.clientService.addClient(firstname, lastname);
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void addPurchase() {
-//        String bookID, clientID;
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Book ID:");
-//            bookID = reader.readLine();
-//            System.out.println("Client ID:");
-//            clientID = reader.readLine();
-//            Future<String> out = this.clientService.addPurchase(Long.parseLong(bookID), Long.parseLong(clientID));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void printClients() {
-//        try {
-//            Future<String> out = this.clientService.getAllClients();
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> clients = (Iterable<String>) jsonObject.get("data");
-//            clients.forEach(System.out::println);
-//        } catch (InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void printPurchases() {
-//        try {
-//            Future<String> out = this.clientService.getAllPurchases();
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> purchases = (Iterable<String>) jsonObject.get("data");
-//            purchases.forEach(System.out::println);
-//        } catch (InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void updateClient() {
-//        String ID, firstname, lastname, spendings;
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Client ID:");
-//            ID = reader.readLine();
-//            System.out.println("New First Name (Blank if unchanged):");
-//            firstname = reader.readLine();
-//            System.out.println("New Last Name (Blank if unchanged):");
-//            lastname = reader.readLine();
-//            System.out.println("New Spendings (Blank if unchanged):");
-//            spendings = reader.readLine();
-//            Future<String> out = this.clientService.updateClient(Long.parseLong(ID), firstname, lastname, Integer.parseInt(spendings));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-
-
-    private void deleteClient() {
-//        String ID;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Client ID:");
-//            ID = reader.readLine();
-//            Future<String> out = this.clientService.deleteClient(Long.parseLong(ID));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void deletePurchase() {
-//        String ID;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Purchase ID:");
-//            ID = reader.readLine();
-//            Future<String> out = this.clientService.deletePurchase(Long.parseLong(ID));
-//            System.out.println(out.get());
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void filterBooksAuthor() {
-//        String author;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Book Author:");
-//            author = reader.readLine();
-//            Future<String> out = this.clientService.filterBooksAuthor(author);
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> books = (Iterable<String>) jsonObject.get("data");
-//            books.forEach(System.out::println);
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void filterBooksPrice() {
-//        String minPrice, maxPrice;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Minimum Price:");
-//            minPrice = reader.readLine();
-//            System.out.println("Maximum Price:");
-//            maxPrice = reader.readLine();
-//            Future<String> out = this.clientService.filterBooksPrice(Integer.parseInt(minPrice), Integer.parseInt(maxPrice));
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> books = (Iterable<String>) jsonObject.get("data");
-//            books.forEach(System.out::println);
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void filterClientsName() {
-//        String name;
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        try {
-//            System.out.println("Client Name:");
-//            name = reader.readLine();
-//            Future<String> out = this.clientService.filterClientsName(name);
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> clients = (Iterable<String>) jsonObject.get("data");
-//            clients.forEach(System.out::println);
-//        } catch (IOException | InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
-    }
-
-    private void filterTopClients() {
-//        try {
-//            Future<String> out = this.clientService.filterTopClients();
-//            JSONObject jsonObject = (JSONObject) JSONValue.parse(out.get());
-//            Iterable<String> clients = (Iterable<String>) jsonObject.get("data");
-//            clients.forEach(System.out::println);
-//        } catch (InterruptedException | ExecutionException e) {
-//            e.printStackTrace();
-//        }
     }
 }

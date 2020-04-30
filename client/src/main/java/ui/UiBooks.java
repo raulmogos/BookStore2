@@ -66,4 +66,32 @@ public class UiBooks {
             e.printStackTrace();
         }
     }
+
+    public void filterBooksAuthor() {
+        String author;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Book Author:");
+            author = reader.readLine();
+            Iterable<Book> books = this.bookClientService.filterBookAuthor(author);
+            books.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void filterBooksPrice() {
+        String minPrice, maxPrice;
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            System.out.println("Minimum Price:");
+            minPrice = reader.readLine();
+            System.out.println("Maximum Price:");
+            maxPrice = reader.readLine();
+            Iterable<Book> books = this.bookClientService.filterBookPrice(Integer.parseInt(minPrice), Integer.parseInt(maxPrice));
+            books.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
