@@ -14,7 +14,7 @@ public interface ClientService {
 
     void removeClient(Long id);
 
-    void updateClient(Long id, String firstname, String lastname, double moneySpent);
+    void updateClient(Long id, String firstName, String lastName, double moneySpent);
 
     Iterable<Client> getAllClients();
 

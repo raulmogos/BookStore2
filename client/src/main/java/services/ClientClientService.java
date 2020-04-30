@@ -25,8 +25,8 @@ public class ClientClientService implements ClientService {
     }
 
     @Override
-    public void updateClient(Long id, String firstname, String lastname, double moneySpent) {
-        clientServerService.updateClient(id, firstname, lastname, moneySpent);
+    public void updateClient(Long id, String firstName, String lastName, double moneySpent) {
+        clientServerService.updateClient(id, firstName, lastName, moneySpent);
     }
 
     @Override

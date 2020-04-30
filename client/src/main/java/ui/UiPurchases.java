@@ -1,6 +1,5 @@
 package ui;
 
-import api.models.Purchase;
 import api.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,14 +13,12 @@ public class UiPurchases {
     private PurchaseService purchaseClientService;
 
     public void addPurchase() {
-        String bookID, clientID;
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Book ID:");
-            bookID = reader.readLine();
+            String bookID = reader.readLine();
             System.out.println("Client ID:");
-            clientID = reader.readLine();
+            String clientID = reader.readLine();
             this.purchaseClientService.addPurchase(Long.parseLong(bookID), Long.parseLong(clientID));
             System.out.println("Purchase added successfully!");
         } catch (IOException e) {
@@ -30,16 +27,14 @@ public class UiPurchases {
     }
 
     public void printPurchases() {
-        Iterable<Purchase> purchases = this.purchaseClientService.getAllPurchases();
-        purchases.forEach(System.out::println);
+        this.purchaseClientService.getAllPurchases().forEach(System.out::println);
     }
 
     public void deletePurchase() {
-        String ID;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Purchase ID:");
-            ID = reader.readLine();
+            String ID = reader.readLine();
             this.purchaseClientService.removePurchase(Long.parseLong(ID));
             System.out.println("Purchase deleted successfully!");
         } catch (IOException e) {

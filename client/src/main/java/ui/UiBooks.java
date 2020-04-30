@@ -36,19 +36,17 @@ public class UiBooks {
     }
 
     public void updateBook() {
-        String ID, title, author, price;
-
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
             System.out.println("Book ID:");
-            ID = reader.readLine();
+            String id = reader.readLine();
             System.out.println("New Book Title (Blank if unchanged):");
-            title = reader.readLine();
+            String title = reader.readLine();
             System.out.println("New Book Author (Blank if unchanged):");
-            author = reader.readLine();
+            String author = reader.readLine();
             System.out.println("New Book Price (Blank if unchanged):");
-            price = reader.readLine();
-            this.bookClientService.updateBook(Long.parseLong(ID), title, author, Long.parseLong(price));
+            String price = reader.readLine();
+            this.bookClientService.updateBook(Long.parseLong(id), title, author, !price.equals("") ? Long.parseLong(price): 0);
             System.out.println("Updated successfully !");
         } catch (IOException e) {
             e.printStackTrace();

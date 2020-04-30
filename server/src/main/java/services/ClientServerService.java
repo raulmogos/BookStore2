@@ -3,7 +3,6 @@ package services;
 import api.models.Client;
 import api.models.validation.ClientValidator;
 import api.services.ClientService;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import repository.client.ClientRepository;
 
@@ -38,10 +37,10 @@ public class ClientServerService implements ClientService {
     }
 
     @Override
-    public void updateClient(Long id, String firstname, String lastname, double moneySpent) {
+    public void updateClient(Long id, String firstName, String lastName, double moneySpent) {
         Client client = clientRepository.get(id).get();
-        client.setFirstName(!firstname.equals("") ? firstname : client.getFirstName());
-        client.setLastName(!lastname.equals("") ? lastname : client.getLastName());
+        client.setFirstName(!firstName.equals("") ? firstName : client.getFirstName());
+        client.setLastName(!lastName.equals("") ? lastName : client.getLastName());
         client.setMoneySpent(moneySpent != NO_MONEY ? moneySpent : client.getMoneySpent());
         clientRepository.update(client);
     }

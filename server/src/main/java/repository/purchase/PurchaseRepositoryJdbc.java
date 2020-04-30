@@ -1,12 +1,10 @@
 package repository.purchase;
 
-import api.models.Book;
 import api.models.Purchase;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
-import repository.book.BookRepositoryJdbc;
 
 import java.sql.ResultSet;
 import java.util.Optional;

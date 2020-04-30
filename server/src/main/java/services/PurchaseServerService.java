@@ -1,6 +1,5 @@
 package services;
 
-import api.models.Book;
 import api.models.Purchase;
 import api.models.validation.PurchaseValidator;
 import api.services.PurchaseService;
@@ -13,10 +12,14 @@ public class PurchaseServerService implements PurchaseService {
 
     private static final double NO_ID = -1.1;
 
-    @Autowired BookRepository bookRepository;
-    @Autowired ClientRepository clientRepository;
-    @Autowired PurchaseRepository purchaseRepository;
-    @Autowired PurchaseValidator purchaseValidator;
+    @Autowired
+    BookRepository bookRepository;
+    @Autowired
+    ClientRepository clientRepository;
+    @Autowired
+    PurchaseRepository purchaseRepository;
+    @Autowired
+    PurchaseValidator purchaseValidator;
 
     @Override
     public Purchase getPurchaseById(Long id) {
@@ -25,6 +28,7 @@ public class PurchaseServerService implements PurchaseService {
 
     @Override
     public void addPurchase(Long bookId, Long clientId) {
+        // todo: validate bookId and clientId
         Purchase purchase = new Purchase(bookId, clientId);
         purchaseValidator.validate(purchase);
         purchaseRepository.save(purchase);

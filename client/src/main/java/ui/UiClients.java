@@ -47,7 +47,7 @@ public class UiClients {
             lastname = reader.readLine();
             System.out.println("New Spendings (Blank if unchanged):");
             spendings = reader.readLine();
-            this.clientClientService.updateClient(Long.parseLong(ID), firstname, lastname, Integer.parseInt(spendings));
+            this.clientClientService.updateClient(Long.parseLong(ID), firstname, lastname, Long.parseLong(spendings));
             System.out.println("Client updated successfully!");
         } catch (IOException e) {
             e.printStackTrace();
