@@ -25,7 +25,7 @@ public class JdbcConfig {
         basicDataSource.setUrl(Dotenv.load().get("DB_URL"));
         basicDataSource.setUsername(Dotenv.load().get("DB_USERNAME"));
         basicDataSource.setPassword(Dotenv.load().get("DB_PASSWORD"));
-        basicDataSource.setInitialSize(2);  // ?
+        basicDataSource.setInitialSize(2);  // Sets the initial size of the connection pool.
         return basicDataSource;
     }
 }
