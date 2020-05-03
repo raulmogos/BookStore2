@@ -34,7 +34,7 @@ public class BookMainService implements BookService {
         bookValidator.validate(book);
         log.trace("addBook - book validated: book={}", book);
         bookRepository.save(book);
-        log.trace("getBookById - method finished");
+        log.trace("addBook - method finished");
     }
 
     @Override

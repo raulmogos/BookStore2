@@ -1,35 +1,64 @@
 package ro.bookstore2.services.purchase;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.bookstore2.models.Purchase;
+import ro.bookstore2.models.validation.PurchaseValidator;
+import ro.bookstore2.repositories.PurchaseRepository;
 
 import java.util.List;
 
 @Service
 public class PurchaseMainService implements PurchaseService {
 
+    public static final Logger log = LoggerFactory.getLogger(PurchaseMainService.class);
+
+    @Autowired
+    private PurchaseRepository purchaseRepository;
+    @Autowired
+    private PurchaseValidator purchaseValidator;
+
     @Override
     public Purchase getPurchaseById(Long id) {
-        return null;
+        log.trace("getPurchaseById - method entered: id={}", id);
+        return purchaseRepository.getOne(id);
     }
 
     @Override
-    public void addPurchase(Long bookId, Long clientId) {
-
+    public void addPurchase(Purchase purchase) {
+        log.trace("addPurchase - method entered: purchase={}", purchase);
+        purchaseValidator.validate(purchase);
+        log.trace("addPurchase - purchase validated: purchase={}", purchase);
+        purchaseRepository.save(purchase);
+        log.trace("addPurchase - method finished");
     }
 
     @Override
     public void removePurchase(Long id) {
-
+        log.trace("removePurchase - method entered: id={}", id);
+        purchaseRepository.deleteById(id);
+        log.trace("removePurchase - method finished");
     }
 
     @Override
-    public void updatePurchase(Long id, Long book_id, Long client_id) {
-
+    public void updatePurchase(Purchase newPurchase) {
+        log.trace("updatePurchase - method entered: newPurchase={}", newPurchase);
+        purchaseValidator.validate(newPurchase);
+        log.trace("updatePurchase - newPurchase validated: newPurchase={}", newPurchase);
+        purchaseRepository.findById(newPurchase.getId()).ifPresent(oldPurchase -> {
+            oldPurchase.setBookId(newPurchase.getBookId());
+            oldPurchase.setClientId(newPurchase.getClientId());
+            purchaseRepository.save(oldPurchase);
+            log.debug("updatePurchase - updated: oldPurchase={}", oldPurchase);
+        });
+        log.trace("updatePurchase - method finished");
     }
 
     @Override
     public List<Purchase> getAllPurchases() {
-        return null;
+        log.trace("getAllPurchases - method entered");
+        return purchaseRepository.findAll();
     }
 }

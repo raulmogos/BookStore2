@@ -10,10 +10,10 @@ public class Console {
 
     @Autowired
     private UiBooks uiBooks;
-//    @Autowired
-//    private UiClients uiClients;
-//    @Autowired
-//    private UiPurchases uiPurchases;
+    @Autowired
+    private UiClients uiClients;
+    @Autowired
+    private UiPurchases uiPurchases;
 
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -46,34 +46,34 @@ public class Console {
                         uiBooks.addBook();
                         break;
                     case 2:
-//                        uiClients.addClient();
+                        uiClients.addClient();
                         break;
                     case 3:
-//                        uiPurchases.addPurchase();
+                        uiPurchases.addPurchase();
                         break;
                     case 4:
                         uiBooks.printBooks();
                         break;
                     case 5:
-//                        uiClients.printClients();
+                        uiClients.printClients();
                         break;
                     case 6:
-//                        uiPurchases.printPurchases();
+                        uiPurchases.printPurchases();
                         break;
                     case 7:
                         uiBooks.updateBook();
                         break;
                     case 8:
-//                        uiClients.updateClient();
+                        uiClients.updateClient();
                         break;
                     case 9:
                         uiBooks.deleteBook();
                         break;
                     case 10:
-//                        uiClients.deleteClient();
+                        uiClients.deleteClient();
                         break;
                     case 11:
-//                        uiPurchases.deletePurchase();
+                        uiPurchases.deletePurchase();
                         break;
                     case 12:
                         uiBooks.filterBooksAuthor();
@@ -82,10 +82,10 @@ public class Console {
                         uiBooks.filterBooksPrice();
                         break;
                     case 14:
-//                        uiClients.filterClientsName();
+                        uiClients.filterClientsName();
                         break;
                     case 15:
-//                        uiClients.filterTopClients();
+                        uiClients.filterTopClients();
                         break;
                     default:
                         System.out.println("Invalid choice");

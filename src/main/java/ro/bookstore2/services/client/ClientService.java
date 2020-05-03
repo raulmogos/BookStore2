@@ -10,11 +10,11 @@ public interface ClientService {
 
     Client getClientById(Long id);
 
-    void addClient(String firstName, String lastName, double moneySpent);
+    void addClient(Client client);
 
     void removeClient(Long id);
 
-    void updateClient(Long id, String firstName, String lastName, double moneySpent);
+    void updateClient(Client client);
 
     List<Client> getAllClients();
 

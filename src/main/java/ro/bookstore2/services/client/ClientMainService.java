@@ -1,44 +1,88 @@
 package ro.bookstore2.services.client;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ro.bookstore2.models.Client;
+import ro.bookstore2.models.validation.ClientValidator;
+import ro.bookstore2.repositories.ClientRepository;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ClientMainService implements ClientService {
+
+    public static final Logger log = LoggerFactory.getLogger(ClientMainService.class);
+
+    @Autowired
+    private ClientRepository clientRepository;
+    @Autowired
+    private ClientValidator clientValidator;
+
     @Override
     public Client getClientById(Long id) {
-        return null;
+        log.trace("getClientById - method entered: id={}", id);
+        return clientRepository.getOne(id);
     }
 
     @Override
-    public void addClient(String firstName, String lastName, double moneySpent) {
-
+    public void addClient(Client client) {
+        log.trace("addClient - method entered: client={}", client);
+        clientValidator.validate(client);
+        log.trace("addClient - client validated: client={}", client);
+        clientRepository.save(client);
+        log.trace("addClient - method finished");
     }
 
     @Override
     public void removeClient(Long id) {
-
+        log.trace("removeClient - method entered: id={}", id);
+        clientRepository.deleteById(id);
+        log.trace("removeClient - method finished");
     }
 
     @Override
-    public void updateClient(Long id, String firstName, String lastName, double moneySpent) {
-
+    public void updateClient(Client newClient) {
+        log.trace("updateClient - method entered: newClient={}", newClient);
+        clientValidator.validate(newClient);
+        log.trace("updateClient - newClient validated: newClient={}", newClient);
+        clientRepository.findById(newClient.getId()).ifPresent(oldClient -> {
+            oldClient.setFirstName(newClient.getFirstName());
+            oldClient.setLastName(newClient.getLastName());
+            oldClient.setMoneySpent(newClient.getMoneySpent());
+            clientRepository.save(oldClient);
+            log.debug("updateClient - updated: oldClient={}", oldClient);
+        });
+        log.trace("updateClient - method finished");
     }
 
     @Override
     public List<Client> getAllClients() {
-        return null;
+        log.trace("getAllClients - method entered");
+        return clientRepository.findAll();
     }
 
     @Override
     public List<Client> filterClientsByName(String name) {
-        return null;
+        ArrayList<Client> filteredClients = new ArrayList<>();
+        clientRepository.findAll().forEach((client) -> {
+            if (client.getFirstName().contains(name) || client.getLastName().contains(name))
+            {
+                filteredClients.add(client);
+            }
+        });
+        return filteredClients;
     }
 
     @Override
     public List<Client> topNClientsOnMoneySpent(int n) {
-        return null;
+        return clientRepository.findAll()
+                .stream()
+                .sorted(Comparator.comparingDouble(Client::getMoneySpent))
+                .collect(Collectors.toList());
     }
 }

@@ -10,11 +10,11 @@ public interface PurchaseService {
 
     Purchase getPurchaseById(Long id);
 
-    void addPurchase(Long bookId, Long clientId);
+    void addPurchase(Purchase purchase);
 
     void removePurchase(Long id);
 
-    void updatePurchase(Long id, Long book_id, Long client_id);
+    void updatePurchase(Purchase newPurchase);
 
     List<Purchase> getAllPurchases();
 }
